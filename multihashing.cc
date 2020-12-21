@@ -129,6 +129,7 @@ using namespace v8;
  DECLARE_CALLBACK(x11, x11_hash, 32);
  DECLARE_CALLBACK(x13, x13_hash, 32);
  DECLARE_CALLBACK(x15, x15_hash, 32);
+ DECLARE_CALLBACK(allium, x15_allium, 32);
 
 
 DECLARE_FUNC(scrypt) {
@@ -625,6 +626,7 @@ DECLARE_FUNC(boolberry) {
 }
 
 DECLARE_FUNC(allium) {
+    DECLARE_SCOPE;
 
     if (info.Length() < 1)
         return THROW_ERROR_EXCEPTION("You must provide one argument.");
