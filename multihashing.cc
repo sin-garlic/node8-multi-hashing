@@ -33,6 +33,7 @@ extern "C" {
     #include "x11.h"
     #include "x13.h"
     #include "x15.h"
+    #include "allium.h"
 }
 
 #include "boolberry.h"
@@ -621,6 +622,26 @@ DECLARE_FUNC(boolberry) {
     boolberry_hash(input, input_len, scratchpad, spad_len, output, height);
 
     SET_BUFFER_RETURN(output, 32);
+}
+
+DECLARE_FUNC(allium) {
+
+    if (info.Length() < 1)
+        return THROW_ERROR_EXCEPTION("You must provide one argument.");
+
+    Local<Object> target = Nan::To<Object>(info[0]).ToLocalChecked();
+
+    if(!Buffer::HasInstance(target))
+        return THROW_ERROR_EXCEPTION("Argument should be a buffer object.");
+
+    char * input = Buffer::Data(target);
+    char *output = (char*) malloc(sizeof(char) * 32);
+
+    // uint32_t input_len = Buffer::Length(target);
+
+    allium_hash(input, output);
+
+    info.GetReturnValue().Set(Nan::NewBuffer(output, 32).ToLocalChecked());
 }
 
 DECLARE_INIT(init) {
