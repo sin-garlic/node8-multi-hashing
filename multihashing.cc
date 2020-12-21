@@ -683,6 +683,7 @@ DECLARE_INIT(init) {
     NODE_SET_METHOD(exports, "x11", x11);
     NODE_SET_METHOD(exports, "x13", x13);
     NODE_SET_METHOD(exports, "x15", x15);
+    NODE_SET_METHOD(exports, "allium", allium);
 }
 
 NODE_MODULE(multihashing, init)
