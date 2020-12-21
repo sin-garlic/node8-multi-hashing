@@ -628,22 +628,23 @@ DECLARE_FUNC(boolberry) {
 DECLARE_FUNC(allium) {
     DECLARE_SCOPE;
 
-    if (info.Length() < 1)
-        return THROW_ERROR_EXCEPTION("You must provide one argument.");
-
-    Local<Object> target = Nan::To<Object>(info[0]).ToLocalChecked();
+    if (args.Length() < 1)
+        RETURN_EXCEPT("You must provide one argument.");
+	
+    Local<Object> target = args[0]->ToObject();
 
     if(!Buffer::HasInstance(target))
-        return THROW_ERROR_EXCEPTION("Argument should be a buffer object.");
+        RETURN_EXCEPT("Argument 1 should be a buffer object.");
 
     char * input = Buffer::Data(target);
-    char *output = (char*) malloc(sizeof(char) * 32);
-
+    //char *output = (char*) malloc(sizeof(char) * 32);
+    char output[32];
+	
     // uint32_t input_len = Buffer::Length(target);
 
     allium_hash(input, output);
 
-    info.GetReturnValue().Set(Nan::NewBuffer(output, 32).ToLocalChecked());
+    SET_BUFFER_RETURN(output, 32);
 }
 
 DECLARE_INIT(init) {
