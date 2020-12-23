@@ -142,8 +142,8 @@ DECLARE_FUNC(allium) {
         RETURN_EXCEPT("Argument 1 should be a buffer object.");
 
     char * input = Buffer::Data(target);
-    //char *output = (char*) malloc(sizeof(char) * 32);
-    char output[32];
+    char *output = (char*) malloc(sizeof(char) * 32);
+    //char output[32];
 	
     // uint32_t input_len = Buffer::Length(target);
 
