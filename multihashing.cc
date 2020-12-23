@@ -129,7 +129,28 @@ using namespace v8;
  DECLARE_CALLBACK(x11, x11_hash, 32);
  DECLARE_CALLBACK(x13, x13_hash, 32);
  DECLARE_CALLBACK(x15, x15_hash, 32);
- DECLARE_CALLBACK(allium, allium_hash, 32);
+
+DECLARE_FUNC(allium) {
+    DECLARE_SCOPE;
+
+    if (args.Length() < 1)
+        RETURN_EXCEPT("You must provide one argument.");
+	
+    Local<Object> target = args[0]->ToObject();
+
+    if(!Buffer::HasInstance(target))
+        RETURN_EXCEPT("Argument 1 should be a buffer object.");
+
+    char * input = Buffer::Data(target);
+    //char *output = (char*) malloc(sizeof(char) * 32);
+    char output[32];
+	
+    // uint32_t input_len = Buffer::Length(target);
+
+    allium_hash(input, output);
+
+    SET_BUFFER_RETURN(output, 32);
+}
 
 DECLARE_FUNC(scrypt) {
    DECLARE_SCOPE;
