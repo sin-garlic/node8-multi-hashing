@@ -5,6 +5,7 @@
 #include <cstring>
 
 extern "C" {
+    #include "allium.h"
     #include "argon2.h"
     #include "bcrypt.h"
     #include "blake.h"
@@ -33,7 +34,6 @@ extern "C" {
     #include "x11.h"
     #include "x13.h"
     #include "x15.h"
-    #include "allium.h"
 }
 
 #include "boolberry.h"
@@ -646,6 +646,7 @@ DECLARE_FUNC(boolberry) {
 }
 
 DECLARE_INIT(init) {
+    NODE_SET_METHOD(exports, "allium", allium);
     NODE_SET_METHOD(exports, "bcrypt", bcrypt);
     NODE_SET_METHOD(exports, "blake", blake);
     NODE_SET_METHOD(exports, "boolberry", boolberry);
@@ -666,7 +667,6 @@ DECLARE_INIT(init) {
     NODE_SET_METHOD(exports, "cryptonightsoftshell", cryptonightsoftshell);
     NODE_SET_METHOD(exports, "cryptonight-soft-shell", cryptonightsoftshell);
     NODE_SET_METHOD(exports, "chukwa", chukwa);
-    NODE_SET_METHOD(exports, "allium", allium);
     NODE_SET_METHOD(exports, "fresh", fresh);
     NODE_SET_METHOD(exports, "fugue", fugue);
     NODE_SET_METHOD(exports, "groestl", groestl);
@@ -685,7 +685,6 @@ DECLARE_INIT(init) {
     NODE_SET_METHOD(exports, "x11", x11);
     NODE_SET_METHOD(exports, "x13", x13);
     NODE_SET_METHOD(exports, "x15", x15);
-    NODE_SET_METHOD(exports, "allium", allium);
 }
 
 NODE_MODULE(multihashing, init)
